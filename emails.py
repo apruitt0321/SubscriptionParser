@@ -10,11 +10,9 @@ output_file = None
 subbed = None
 
 def gen_report(df, of):
-    r = ['Email Address', 'FirstName', 'LastName', 
-        'SubscriberStatus', 'AddedTime', 'RemovedTime']
     with open(of, 'w') as f:
         df.to_csv(f)
-    rows = df[r].shape[0]
+    rows = df.shape[0]
     print(f"Full data written to {of}.")
     print(f"There were {rows} total entries.")
 
@@ -82,7 +80,6 @@ subs_btwn = subs_bfr.loc[(subs_bfr['SubscriberStatus'] == 'Subscribed')
         | (subs_bfr['RemovedTime'] > end_date)]
 
 # Generate report by writing resutls to file
-# Need to remove 'AddedTime' and 'RemovedTime' in favor of 'Atime' and 'Rtime'
 gen_report(subs_btwn, output_file)
 
 
