@@ -3,12 +3,13 @@ import pandas as pd
 import argparse
 
 # Variables
-start_date = None
-end_date = None
-input_file = 'subs.csv'
-output_file = None
-subbed = None
+start_date = None           # First day of the desired month
+end_date = None             # First day of the month after desired
+input_file = 'subs.csv'     # csv file to read
+output_file = None          # csv file to save to
+subbed = None               # Pandas dataframe object
 
+# Function to write pandas dataframe to a csv file
 def gen_report(df, of):
     with open(of, 'w') as f:
         df.to_csv(f)
@@ -26,8 +27,7 @@ parser.add_argument('-of', '--out_file',
         help="Specify the path to an output file.")
 args = parser.parse_args()
 
-# Parse date argument. If no date argument is provided, defaults to current
-# month and year.
+# Parse date argument.
 if args.date:
     try:
         start_date = pd.to_datetime(args.date)
@@ -59,22 +59,17 @@ else:
     output_file = f"{args.date}.csv"
 
 # Open and read csv into pandas dataframe object
-print("Loading csv file into dataframe...")
 with open(input_file,'r') as f:
     subbed = pd.read_csv(f, delimiter=',')
-print("Done.")
 
-# Convert times to datetime objects. Time intesive.
-print("Converting 'AddedTime'...")
-subbed['AddedTime'] = pd.to_datetime(subbed['AddedTime'])
-print("Done.")
-print("Converting 'RemovedTime'...")
-subbed['RemovedTime'] = pd.to_datetime(subbed['RemovedTime'],errors='ignore')
-print("Done.")
+# Convert times to datetime objects.
+# Explicity specifying time format reduces runtime significantly.
+subbed['AddedTime'] = pd.to_datetime(subbed['AddedTime'], 
+        format = '%m/%d/%Y %H:%M')
+subbed['RemovedTime'] = pd.to_datetime(subbed['RemovedTime'],
+        format = '%m/%d/%Y %H:%M', errors='ignore')
 
-# Filter dataframe. Takes slice of all entries subscribed before end_date,
-# then returns slice of those who are still subscribed or whose unsubscription
-# date is after end_date.
+# Filter dataframe.
 subs_bfr = subbed.loc[(subbed['AddedTime'] < end_date)]
 subs_btwn = subs_bfr.loc[(subs_bfr['SubscriberStatus'] == 'Subscribed')
         | (subs_bfr['RemovedTime'] > end_date)]
