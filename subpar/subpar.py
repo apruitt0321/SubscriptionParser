@@ -90,4 +90,12 @@ def run():
     plt.savefig('../Reports/graph.png')
     gen_report(subs_btwn, output_file)
 
+if __name__ == "__main__":
+    subbed = load_df(input_file)
+    subs_btwn = filter_time(subbed)
+    subs_over_time = plot_year(subbed)
+    subs_over_time.plot(x='Month', y = 'Subscribers')
+    plt.savefig('../Reports/graph.png')
+    gen_report(subs_btwn, output_file)
+
 
