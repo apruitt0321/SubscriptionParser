@@ -4,6 +4,15 @@ import argparse
 import matplotlib.pyplot as plt
 import os.path as path
 
+class Report:
+    def __init__(self, date, ifile, ofile):
+        self.date = pd.to_datetime(date)
+        self.start = pd.to_datetime('2018-05-01')
+        self.end = self.date + pd.DateOffset(months=1)
+        self.ifile = ifile
+        self.ofile = ofile
+        self.s_over_t = None
+
 # Variables
 info = None                     #First day of desired month
 start_date = pd.to_datetime('2018-05-01')  # Earliest supported date
@@ -62,12 +71,14 @@ def filter_time(subbed, ed=end_date):
 
 def get_year(subbed):
     s = []
+    months = { 1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun',
+            7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'}
     m = start_date
     for i in range(0,13):
         m = start_date + pd.DateOffset(months=i)
         d = start_date + pd.DateOffset(months=(i+1))
         x = filter_time(subbed, d)
-        key = f"{m.month}/{m.year}"
+        key = f"{months[m.month]} {m.year}"
         s.append([key, x.shape[0]])
     subs_over_time = pd.DataFrame(s, columns=['Month', 'Subscribers'])
     return subs_over_time
