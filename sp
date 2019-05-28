@@ -1,3 +1,7 @@
 #!/usr/bin/python3
 import subpar.subpar
-subpar.subpar.run()
+
+try:
+    subpar.subpar.run()
+except SystemExit:
+    print("Exiting...")

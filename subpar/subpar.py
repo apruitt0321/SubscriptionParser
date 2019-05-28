@@ -1,6 +1,4 @@
-#!/usr/bin/python3
 import pandas as pd
-import argparse
 import matplotlib.pyplot as plt
 import os.path as path
 
