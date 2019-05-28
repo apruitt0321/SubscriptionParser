@@ -26,7 +26,7 @@ The default output file is '{month} {year}.csv'. This can be changed with the
 `-of` (or `--out-file`) flag:
 
 ```
-./subpar.py -of <path/to/outputfile.csv>
+./sp -i <input_file> -of <path/to/outputfile.csv>
 ```
 
 SubscriptionParser gives the total subscribers for the current month by
@@ -34,17 +34,17 @@ default. If you'd like to generate a report for a specific month, you can
 specify the month and year by using the `-d` (`--date`) flag:
 
 ```
-./subpar.py -d "January 2019"
-./subpar.py -d "10/2018"
-./subpar.py -d "12-2018"
+./sp -i <input_file> -d "January 2019"
+./sp -i <input_file> -d "10/2018"
+./sp -i <input_file> -d "12-2018"
 ```
 
 Putting it all together:
 
 ```
-./subpar.py -i ./my_subscribers.csv -of ./NewFolder/03-19.csv -d "march 2019"
-./subpar.py -i ~/Docs/subs.csv -of ~/Docs/Dec18.csv -d "12/2018"
-./subpar.py --date "April 2019" -of C:\Users\Andy\Desktop\04_19.csv
+./sp -i ./my_subscribers.csv -of ./NewFolder/03-19.csv -d "march 2019"
+./sp -i ~/Docs/subs.csv -of ~/Docs/Dec18.csv -d "12/2018"
+./sp -i file.csv --date "April 2019" -of C:\Users\Andy\Desktop\04_19.csv
 ```
 
 
