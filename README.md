@@ -3,38 +3,30 @@
 A simple script for parsing a csv and returning the number of subscribers for a
 given month.
 
-== Requirements ==
+## Requirements ##
 SubscriptionParser requires pandas and matplotlib.
 
-== How to use ==
+## How to use ##
 SubscriptionParser currently must be called from the commandline. 
 You must currently be in the directory in which the script is located. 
 You may either call it using the python interpreter:
 
 ```
-python subpar.py
+python sp -i <path/to/input_file.csv>
 ```
 
 or by making it executable and calling it directly:
 
 ```
-chmod +x subpar.py
-./subpar.py
+chmod +x sp
+./sp -i <path/to/input_file.csv>
 ```
 
-By default, SubscriptionParser looks in the current directory for a file called
-'subs.csv'. This can be changed by using the `-if` flag (or `--in-file`),
-like so:
-
-```
-./subpar.py -if path/to/inputfile.csv
-```
-
-The default output file is '{month}-{year}.csv'. This can be changed with the
+The default output file is '{month} {year}.csv'. This can be changed with the
 `-of` (or `--out-file`) flag:
 
 ```
-./subpar.py -of path/to/outputfile.csv
+./subpar.py -of <path/to/outputfile.csv>
 ```
 
 SubscriptionParser gives the total subscribers for the current month by
@@ -50,8 +42,8 @@ specify the month and year by using the `-d` (`--date`) flag:
 Putting it all together:
 
 ```
-./subpar.py -if ./my_subscribers.csv -of ./NewFolder/03-19.csv -d "march 2019"
-./subpar.py -if ~/Docs/subs.csv -of ~/Docs/Dec18.csv -d "12/2018"
+./subpar.py -i ./my_subscribers.csv -of ./NewFolder/03-19.csv -d "march 2019"
+./subpar.py -i ~/Docs/subs.csv -of ~/Docs/Dec18.csv -d "12/2018"
 ./subpar.py --date "April 2019" -of C:\Users\Andy\Desktop\04_19.csv
 ```
 

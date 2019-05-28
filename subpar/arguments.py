@@ -8,7 +8,7 @@ def init_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-d', '--date', 
             help="Enter a date, ex: 'July 2012'.")
-    parser.add_argument('-if', '--in_file',
+    parser.add_argument('-i', '--in_file',
             help="Specify the path to a csv file as input.")
     parser.add_argument('-of', '--out_file',
             help="Specify the path to an output file.")
@@ -18,8 +18,6 @@ def init_args():
     if args.in_file:
         g.input_file = args.in_file
     else: 
-        #print('No input file. Defaulting to "subs.csv" in current directory.')
-        #g.input_file = './subs.csv'
         print('No input file specified.')
         sys.exit()
 
