@@ -2,3 +2,4 @@
 __pycache__/
 /venv/
 /subpar/subs.csv
+*subs.csv
